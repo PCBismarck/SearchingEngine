@@ -1,7 +1,7 @@
 # SearchingEngine
 一个简单的搜索引擎
-参考了 [gofound](https://github.com/sea-team/gofound) 的实现
-使用leveldb作为数据库以及倒排索引的存储
+参考了 [gofound](https://github.com/sea-team/gofound) 的实现<br/>
+使用leveldb作为数据库以及倒排索引的存储<br/>
 目前仅支持**查询**功能，数据库的更新需要使用**init_levelDB/load_doc_test.go**来根据文档库生成新的数据库
 ## 倒排索引的创建
 基本逻辑为：

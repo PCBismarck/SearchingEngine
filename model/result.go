@@ -37,3 +37,7 @@ func (qr *QueryResult) Front() (*DocRank, bool) {
 	result, ok := qr.result.Dequeue()
 	return result.(*DocRank), ok
 }
+
+func (qr *QueryResult) Size() int {
+	return qr.result.Size()
+}

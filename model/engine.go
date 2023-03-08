@@ -155,22 +155,22 @@ func (e *Engine) GetDoc(id string) (doc *Doc, err error) {
 }
 
 // 为engine的 idtokeywords 添加 id->[]keywords
-// 会提取 doc 中的前20个关键字存入leveldb中，采用 jieba的 extract(TF/IDF)
+// 会提取 doc 中的前30个关键字和weight存入leveldb中，采用 jieba的 extractwithweight(TF/IDF)
 // 在addDoc后为新添加的doc添加关键字集合
-func (e *Engine) AddDocKeywords(id string) (ok bool, err error) {
-	if e.IdToKeywords.IsClosed() {
+func (db *Engine) AddDocKeywords(id string) (ok bool, err error) {
+	if db.IdToKeywords.IsClosed() {
 		return false, fmt.Errorf("DB is closed")
 	}
-	doc, err := e.GetDoc(id)
+	doc, err := db.GetDoc(id)
 	if err != nil {
 		return false, err
 	}
-	s := e.Tokenizer.Extract(doc.Text, 20)
+	s := db.Tokenizer.ExtractWithWeight(doc.Text, 30)
 	buf, err := json.Marshal(s)
 	if err != nil {
 		return false, err
 	}
-	err = e.IdToKeywords.Put([]byte(id), buf)
+	err = db.IdToKeywords.Put([]byte(id), buf)
 	if err != nil {
 		return false, err
 	}

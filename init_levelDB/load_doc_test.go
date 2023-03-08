@@ -10,12 +10,13 @@ import (
 )
 
 const start, end = 0, 1000
-const doc_base_name = "doc/doc_"
+
+// const doc_base_name = "doc/doc_"
 
 // 将 doc/doc_x 的文档加入levedb
 // 文档格式：1. 第一行是link 2. 第二行是title 3. 第三行往后开始是文档内容
 func AddDocuments(db *model.Engine) {
-	base := doc_base_name
+	base := "doc/doc_"
 	for i := start; i < end; i++ {
 		db.AddDoc(fmt.Sprintf(base+"%v.txt", i), strconv.Itoa(i))
 	}

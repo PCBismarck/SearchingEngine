@@ -123,11 +123,14 @@ func (e *Engine) AddDoc(doc_path string, id string) (ok bool, err error) {
 	buf, _ = r.ReadBytes('\n')
 	title := string(buf)
 	buf, _ = os.ReadFile(doc_path)
+	date := string(buf)
+	buf, _ = os.ReadFile(doc_path)
 	text := string(buf)
 	doc := Doc{
 		Link:  link,
 		Title: title[7:],
 		Text:  text,
+		Date:  date,
 	}
 	buf, err = json.Marshal(doc)
 	if err != nil {

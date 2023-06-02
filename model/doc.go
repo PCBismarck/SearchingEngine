@@ -4,6 +4,7 @@ type Doc struct {
 	Link  string
 	Title string
 	Text  string
+	Date  string
 }
 
 type DocRank struct {
